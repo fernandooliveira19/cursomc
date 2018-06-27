@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.fernando.oliveira.cursomc.domain.Categoria;
 import com.fernando.oliveira.cursomc.domain.Cidade;
+import com.fernando.oliveira.cursomc.domain.Cliente;
+import com.fernando.oliveira.cursomc.domain.Endereco;
 import com.fernando.oliveira.cursomc.domain.Estado;
 import com.fernando.oliveira.cursomc.domain.Produto;
+import com.fernando.oliveira.cursomc.domain.enums.TipoCliente;
 import com.fernando.oliveira.cursomc.repositories.CategoriaRepository;
 import com.fernando.oliveira.cursomc.repositories.CidadeRepository;
+import com.fernando.oliveira.cursomc.repositories.ClienteRepository;
+import com.fernando.oliveira.cursomc.repositories.EnderecoRepository;
 import com.fernando.oliveira.cursomc.repositories.EstadoRepository;
 import com.fernando.oliveira.cursomc.repositories.ProdutoRepository;
 
@@ -27,6 +32,11 @@ public class CursomcApplication implements CommandLineRunner{
 	private EstadoRepository estadoRepository;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -57,11 +67,20 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		Cidade c1 = new Cidade(null,"Uberlândia", est1);
 		Cidade c2 = new Cidade(null,"São Paulo", est2);
-		Cidade c3 = new Cidade(null,"Campinas", est2);
+		Cidade c3 = new Cidade(null,"Guaruja", est2);
 		
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
 		
 		
+		Cliente cliente = new Cliente(null, "Fernando", "fer.a.oliveira19@gmail.com", "29683018882", TipoCliente.PESSOA_FISICA);
+		
+		cliente.getTelefones().add("20354885");
+		
+		Endereco end1 = new Endereco(null, "Rua Rio de Janeiro", "50", "apto 617", "Centro", "11410310", c3, cliente );
+		Endereco end2 = new Endereco(null, "Rua Vicente Aprígio", "600", "casa 4", "Jardim Aurora", "08431090", c3, cliente );
+		
+		clienteRepository.saveAll(Arrays.asList(cliente));
+		enderecoRepository.saveAll(Arrays.asList(end1,end2));
 	}
 }
