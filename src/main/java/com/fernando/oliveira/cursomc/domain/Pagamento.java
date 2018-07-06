@@ -2,7 +2,6 @@ package com.fernando.oliveira.cursomc.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -11,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fernando.oliveira.cursomc.domain.enums.StatusPagamento;
 
 @Entity
@@ -26,6 +26,7 @@ public abstract class Pagamento implements Serializable {
 	@OneToOne
 	@MapsId
 	@JoinColumn(name="ID_PEDIDO")
+	@JsonIgnore
 	private Pedido pedido;
 	private Integer status;
 
