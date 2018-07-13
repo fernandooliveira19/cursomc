@@ -1,6 +1,7 @@
 package com.fernando.oliveira.cursomc.services;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fernando.oliveira.cursomc.domain.Categoria;
+import com.fernando.oliveira.cursomc.domain.dto.CategoriaDTO;
 import com.fernando.oliveira.cursomc.repositories.CategoriaRepository;
 import com.fernando.oliveira.cursomc.services.exception.DataIntegrityException;
 import com.fernando.oliveira.cursomc.services.exception.ObjectNotFoundException;
@@ -44,5 +46,10 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não foi possivel excluir uma categoria, pois tem um produto associado");
 		}
 		
+	}
+
+	public List<Categoria> findAll() {
+		List<Categoria> lista = repo.findAll();
+		return lista;
 	}
 }
