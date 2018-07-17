@@ -1,15 +1,16 @@
 package com.fernando.oliveira.cursomc.services;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.fernando.oliveira.cursomc.domain.Categoria;
-import com.fernando.oliveira.cursomc.domain.dto.CategoriaDTO;
 import com.fernando.oliveira.cursomc.repositories.CategoriaRepository;
 import com.fernando.oliveira.cursomc.services.exception.DataIntegrityException;
 import com.fernando.oliveira.cursomc.services.exception.ObjectNotFoundException;
@@ -52,4 +53,10 @@ public class CategoriaService {
 		List<Categoria> lista = repo.findAll();
 		return lista;
 	}
+	
+	public Page<Categoria> findPage(Integer page, Integer size, String direction, String orderBy){
+		PageRequest list = PageRequest.of(page, size, Direction.valueOf(direction), orderBy);
+		return repo.findAll(list);
+	}
+	
 }
