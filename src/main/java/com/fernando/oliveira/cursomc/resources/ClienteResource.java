@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fernando.oliveira.cursomc.domain.Cliente;
-import com.fernando.oliveira.cursomc.domain.Cliente;
 import com.fernando.oliveira.cursomc.domain.dto.ClienteDTO;
+import com.fernando.oliveira.cursomc.domain.dto.ClienteNewDTO;
 import com.fernando.oliveira.cursomc.services.ClienteService;
 
 @RestController
@@ -38,8 +38,8 @@ public class ClienteResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO dto ){
-		Cliente obj = service.fromDTO(dto);
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO dto ){
+		Cliente obj = service.fromNewDTO(dto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
