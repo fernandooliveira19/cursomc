@@ -16,11 +16,11 @@ public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	@NotEmpty(message="O campo nome é obrigatório")
+	@NotEmpty(message="Preenchimento obrigatório")
 	@Size(min=5, max=100, message="O campo nome deve ter entre 5 e 100 caracteres")
 	private String nome;
 	
-	@NotEmpty(message="O campo nome é obrigatório")
+	@NotEmpty(message="Preenchimento obrigatório")
 	@Email(message="E-mail inválido")
 	private String email;
 	
