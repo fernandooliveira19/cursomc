@@ -134,9 +134,9 @@ public class Cliente implements Serializable {
 
 
 
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
-	}
+//	public void setTipo(Integer tipo) {
+//		this.tipo = tipo;
+//	}
 
 
 

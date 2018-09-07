@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fernando.oliveira.cursomc.domain.enums.StatusPagamento;
 
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento implements Serializable {
 
 	/**
