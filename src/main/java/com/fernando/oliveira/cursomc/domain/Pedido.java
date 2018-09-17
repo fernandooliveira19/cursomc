@@ -1,8 +1,12 @@
 package com.fernando.oliveira.cursomc.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -146,6 +150,31 @@ public class Pedido implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		NumberFormat nf = NumberFormat.getInstance(new Locale("pt","BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append("Pedido numero: ");
+		builder.append(getId());
+		builder.append(", Instante: ");
+		builder.append(sdf.format(getInstante()));
+		builder.append(", Cliente: ");
+		builder.append(getCliente().getNome());
+		builder.append(", Situação do pgto: ");
+		builder.append(getPagamento().getStatus().getDescricao());
+		builder.append(",\n Detalhes: \n");
+		
+		for(ItemPedido ip : getItens()) {
+			builder.append(ip.toString());
+		}
+		
+		builder.append("Valor total: " );
+		builder.append(nf.format(getValorTotal()));
+		return builder.toString();
 	}
 	
 	
